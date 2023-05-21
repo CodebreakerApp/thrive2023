@@ -1,54 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-
-using BenchmarkDotNet.Attributes;
-
-using Microsoft.Diagnostics.Tracing.Parsers.ClrPrivate;
+﻿using System.Numerics;
 
 namespace PatternMatching;
 public class Runner
 {
-    private int[] _data = { 1, 2, 3, 5, 6, 7, 8, 9, 11, 22 };
-
-
-    [Benchmark]
-    public void IntWithFor()
-    {
-        var result = Accumulate1(_data);
-    }
-
-    [Benchmark]
-    public void IntWithForEach()
-    {
-        var result = Accumulate2(_data);
-    }
-
-    [Benchmark]
-    public void GenericWithForeach()
-    {
-        var result = Accumulate3(_data);
-    }
-
-    [Benchmark]
-    public void PatternMatching()
-    {
-        var result = Accumulate4(_data);
-    }
-
-    [Benchmark]
-    public void PatternMatchingWithSpan()
-    {
-        var result = Accumulate5(_data.AsSpan());
-    }
-
     static public int Accumulate1(int[] data)
     {
         int sum = 0;
-        for (int i = 0; i < data.Length; i++) 
+        for (int i = 0; i < data.Length; i++)
         {
             sum += data[i];
         }

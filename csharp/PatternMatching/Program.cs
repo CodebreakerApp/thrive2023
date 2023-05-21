@@ -5,7 +5,7 @@ using BenchmarkDotNet.Running;
 
 using PatternMatching;
 
-var summary = BenchmarkRunner.Run<Runner>();
+var summary = BenchmarkRunner.Run<Benchmark>();
 
 //if (args.Length == 0)
 //{
