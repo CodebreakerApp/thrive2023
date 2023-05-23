@@ -1,0 +1,554 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Codebreaker.GameAPIs",
+        "version": "1.0"
+    },
+    "paths": {
+        "/games": {
+            "post": {
+                "tags": [
+                    "Codebreaker"
+                ],
+                "summary": "Creates and starts a game",
+                "operationId": "CreateGame",
+                "requestBody": {
+                    "description": "The data of the game to create",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateGameRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateGameResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/games/{gameId}/moves": {
+            "put": {
+                "tags": [
+                    "Codebreaker"
+                ],
+                "summary": "Sets a move for the game with the given id",
+                "operationId": "SetMove",
+                "parameters": [
+                    {
+                        "name": "gameId",
+                        "in": "path",
+                        "description": "The id of the game to create a move for",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The data for creating the move",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetMoveRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SetMoveResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/games/rank/{date}": {
+            "get": {
+                "tags": [
+                    "Codebreaker"
+                ],
+                "summary": "Get games by the given date and type",
+                "operationId": "GetGames",
+                "parameters": [
+                    {
+                        "name": "date",
+                        "in": "path",
+                        "description": "The of date to get the games from. (e.g. 2023-01-01)",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "gameType",
+                        "in": "query",
+                        "required": true,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetGamesRankResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/games/{gameId}": {
+            "get": {
+                "tags": [
+                    "Codebreaker"
+                ],
+                "operationId": "GetGame",
+                "parameters": [
+                    {
+                        "name": "gameId",
+                        "in": "path",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Game"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Codebreaker"
+                ],
+                "operationId": "DeleteGame",
+                "parameters": [
+                    {
+                        "name": "gameId",
+                        "in": "path",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ColorField": {
+                "type": "object",
+                "properties": {
+                    "color": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ColorResult": {
+                "type": "object",
+                "properties": {
+                    "correct": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "wrongPosition": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CreateGameRequest": {
+                "type": "object",
+                "properties": {
+                    "gameType": {
+                        "$ref": "#/components/schemas/GameType"
+                    },
+                    "playerName": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CreateGameResponse": {
+                "type": "object",
+                "properties": {
+                    "gameId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "gameType": {
+                        "$ref": "#/components/schemas/GameType"
+                    },
+                    "playerName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "colorFields": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ColorField"
+                        },
+                        "nullable": true
+                    },
+                    "shapeFields": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ShapeAndColorField"
+                        },
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Game": {
+                "type": "object",
+                "properties": {
+                    "gameId": {
+                        "type": "string",
+                        "format": "uuid",
+                        "readOnly": true
+                    },
+                    "gameType": {
+                        "$ref": "#/components/schemas/GameType"
+                    },
+                    "playerName": {
+                        "type": "string",
+                        "nullable": true,
+                        "readOnly": true
+                    },
+                    "startTime": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true
+                    },
+                    "endTime": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "duration": {
+                        "$ref": "#/components/schemas/TimeSpan"
+                    },
+                    "lastMoveNumber": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "holes": {
+                        "type": "integer",
+                        "format": "int32",
+                        "readOnly": true
+                    },
+                    "maxMoves": {
+                        "type": "integer",
+                        "format": "int32",
+                        "readOnly": true
+                    },
+                    "won": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "GameInfo": {
+                "type": "object",
+                "properties": {
+                    "gameId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "playerName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "startTime": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "duration": {
+                        "$ref": "#/components/schemas/TimeSpan"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "GameType": {
+                "enum": [
+                    "Game6x4",
+                    "Game6x4Mini",
+                    "Game8x5",
+                    "Game5x5x4"
+                ],
+                "type": "string"
+            },
+            "GetGamesRankResponse": {
+                "type": "object",
+                "properties": {
+                    "date": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "gameType": {
+                        "$ref": "#/components/schemas/GameType"
+                    },
+                    "games": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/GameInfo"
+                        },
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "SetMoveRequest": {
+                "type": "object",
+                "properties": {
+                    "gameId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "gameType": {
+                        "$ref": "#/components/schemas/GameType"
+                    },
+                    "playerName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "moveNumber": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "colorGuessPegs": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ColorField"
+                        },
+                        "nullable": true
+                    },
+                    "shapeGuessPegs": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ShapeAndColorField"
+                        },
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "SetMoveResponse": {
+                "type": "object",
+                "properties": {
+                    "gameId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "gameType": {
+                        "$ref": "#/components/schemas/GameType"
+                    },
+                    "moveNumber": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "colorResult": {
+                        "$ref": "#/components/schemas/ColorResult"
+                    },
+                    "shapeResult": {
+                        "$ref": "#/components/schemas/ShapeAndColorResult"
+                    },
+                    "simpleResult": {
+                        "$ref": "#/components/schemas/SimpleColorResult"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ShapeAndColorField": {
+                "type": "object",
+                "properties": {
+                    "shape": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "color": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ShapeAndColorResult": {
+                "type": "object",
+                "properties": {
+                    "correct": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "wrongPosition": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "colorOrShape": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "SimpleColorResult": {
+                "type": "object",
+                "additionalProperties": false
+            },
+            "TimeSpan": {
+                "type": "object",
+                "properties": {
+                    "ticks": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "days": {
+                        "type": "integer",
+                        "format": "int32",
+                        "readOnly": true
+                    },
+                    "hours": {
+                        "type": "integer",
+                        "format": "int32",
+                        "readOnly": true
+                    },
+                    "milliseconds": {
+                        "type": "integer",
+                        "format": "int32",
+                        "readOnly": true
+                    },
+                    "microseconds": {
+                        "type": "integer",
+                        "format": "int32",
+                        "readOnly": true
+                    },
+                    "nanoseconds": {
+                        "type": "integer",
+                        "format": "int32",
+                        "readOnly": true
+                    },
+                    "minutes": {
+                        "type": "integer",
+                        "format": "int32",
+                        "readOnly": true
+                    },
+                    "seconds": {
+                        "type": "integer",
+                        "format": "int32",
+                        "readOnly": true
+                    },
+                    "totalDays": {
+                        "type": "number",
+                        "format": "double",
+                        "readOnly": true
+                    },
+                    "totalHours": {
+                        "type": "number",
+                        "format": "double",
+                        "readOnly": true
+                    },
+                    "totalMilliseconds": {
+                        "type": "number",
+                        "format": "double",
+                        "readOnly": true
+                    },
+                    "totalMicroseconds": {
+                        "type": "number",
+                        "format": "double",
+                        "readOnly": true
+                    },
+                    "totalNanoseconds": {
+                        "type": "number",
+                        "format": "double",
+                        "readOnly": true
+                    },
+                    "totalMinutes": {
+                        "type": "number",
+                        "format": "double",
+                        "readOnly": true
+                    },
+                    "totalSeconds": {
+                        "type": "number",
+                        "format": "double",
+                        "readOnly": true
+                    }
+                },
+                "additionalProperties": false
+            }
+        }
+    }
+}
