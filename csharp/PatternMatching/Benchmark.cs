@@ -4,6 +4,8 @@ using BenchmarkDotNet.Attributes;
 
 namespace PatternMatching;
 
+[SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.NativeAot80)]
+[SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.Net80)]
 [MemoryDiagnoser]
 public class Benchmark
 {
