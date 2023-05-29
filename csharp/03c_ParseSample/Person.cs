@@ -25,7 +25,7 @@ public record class Person : IParsable<Person>, ISpanParsable<Person>, ISpanForm
 
     public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, [MaybeNullWhen(false)] out Person result)
     { 
-        var names = s?.Split(' ');
+        string[]? names = s?.Split(' ');
         result = names switch
         {
             { Length: 2 } => new Person { FirstName = names[0], LastName = names[1] },
@@ -51,7 +51,7 @@ public record class Person : IParsable<Person>, ISpanParsable<Person>, ISpanForm
 
     public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, [MaybeNullWhen(false)] out Person result)
     {
-        var index = s.IndexOf(' ');
+        int index = s.IndexOf(' ');
         if (index < 0)
         {
             result = null;

@@ -24,7 +24,6 @@ if (p2.TryFormat(dataSpan, out int chars, "F".AsSpan()))
     Console.WriteLine(first.ToString());
 }
 
-
 if (ColorResult.TryParse("1:2", default, out ColorResult result))
 {
     Console.WriteLine($"correct: {result.Correct}, wrong position: {result.WrongPosition}");
