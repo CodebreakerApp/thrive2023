@@ -16,7 +16,15 @@ Console.WriteLine(mydata2);
 // positional readonly struct records
 public readonly record struct MyRecord1(int X, int Y);
 
+// positional struct records
 public record struct MyRecord2(int X, int Y);
+
+// nominal struct records
+public record struct MyRecord3
+{
+    public int X { get; init; }
+    public int Y { get; init; }
+}
 
 // parameterless constructor with structs!
 public struct MyData
