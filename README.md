@@ -30,9 +30,11 @@ Azure Container Apps are a cheap and serverless alternative to Azure Kubernetes 
 
 ## Slides and Samples
 
-[C# What's new and cool?](slides/CSharp2023.pdf)
+### C# - what's new and cool?
 
-[Samples](csharp)
+[Slides](slides/CSharp2023.pdf)
+
+[Samples](csharp/)
 
 * Enhancements with structs
 * Required modifier
@@ -43,3 +45,9 @@ Azure Container Apps are a cheap and serverless alternative to Azure Kubernetes 
 * Raw String literals
 * .NET 7 source generators
 * Native AOT
+
+### Finding issues with your .NET applications – monitoring and logging
+
+[Slides](slides/Diagnostics.pdf)
+
+[Samples](diagnostics/)
