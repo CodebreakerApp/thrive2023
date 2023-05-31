@@ -53,6 +53,11 @@ Azure Container Apps are a cheap and serverless alternative to Azure Kubernetes 
 
 [Samples](diagnostics/)
 
+* Logging
+* Metrics
+* Distributed tracing
+* OpenTelemetry
+
 ## Minimal APIs in ASP.NET Core
 
 [Sidles](slides/MinimalAPI2023.pdf)
