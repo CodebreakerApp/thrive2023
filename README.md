@@ -20,7 +20,8 @@ Creating Microservices it's important to know how the application is running - m
 
 31.5.2023, 13:45 - 14:45, Grascina Gratiosa
 
-For quite a while, ASP.NET Core MVC was the only choice when writing REST APIs with ASP.NET Core. It is still a good and valid choice, especially for more complex REST APIs. However, we now have a new way of defining web APIs, for simpler REST APIs, microservice-oriented projects, and simple web apps. Minimal APIs come without the overhead and kitchen-sink approach of MVC. We'll look into the supported features, how they compare with MVC, how Minimal APIs can be extended with libraries like Carter, and what the future brings for Minimal APIs.
+For quite a while, ASP.NET Core MVC was the only choice when writing REST APIs with ASP.NET Core. It is still a good and valid choice. However, we now have a new way of defining web APIs, for simpler REST APIs, microservice-oriented projects, which can event be used with bigger services. Minimal APIs come without the overhead and kitchen-sink approach of MVC.
+In this session you'll learn the progress done including with .NET 7 such as grouping, typed results, and filters, and look into the directions .NET is taking with .NET 8 in relation to hosting applications in cloud environments.
 
 ## Creating and running .NET services with Azure Container Apps
 
@@ -48,6 +49,19 @@ Azure Container Apps are a cheap and serverless alternative to Azure Kubernetes 
 
 ### Finding issues with your .NET applications – monitoring and logging
 
-[Slides](slides/Diagnostics.pdf)
+[Slides](slides/Diagnostics2023.pdf)
 
 [Samples](diagnostics/)
+
+## Minimal APIs in ASP.NET Core
+
+[Sidles](slides/MinimalAPI2023.pdf)
+
+[Samples](minimalapi)
+
+* Controllers with .NET 5
+* Update to .NET 6
+* Minimal API with .NET 6
+* Scaffolding for database access
+* Grouping, filtering (GamesAPIDotnet7)
+* AOT
