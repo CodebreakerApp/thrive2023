@@ -7,6 +7,11 @@
     <RootNamespace>Codebreaker</RootNamespace>
     <PublishAot>true</PublishAot>
     <StripSymbols>true</StripSymbols>
+    <UserSecretsId>bb80d539-2fd8-4e80-90d4-cd4bc60f610c</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.1" />
+  </ItemGroup>
 
 </Project>
