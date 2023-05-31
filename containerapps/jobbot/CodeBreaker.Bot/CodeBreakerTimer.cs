@@ -39,7 +39,7 @@ public class CodeBreakerTimer
         _bots.TryAdd(id, this);
 
         _timer = new PeriodicTimer(TimeSpan.FromSeconds(delaySecondsBetweenGames));
-        Task _ = Task.Factory.StartNew(async () =>
+        _ = Task.Factory.StartNew(async () =>
         {
             try
             {
