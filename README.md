@@ -58,7 +58,7 @@ Azure Container Apps are a cheap and serverless alternative to Azure Kubernetes 
 * Distributed tracing
 * OpenTelemetry
 
-## Minimal APIs in ASP.NET Core
+### Minimal APIs in ASP.NET Core
 
 [Sidles](slides/MinimalAPI2023.pdf)
 
@@ -70,3 +70,11 @@ Azure Container Apps are a cheap and serverless alternative to Azure Kubernetes 
 * Scaffolding for database access
 * Grouping, filtering (GamesAPIDotnet7)
 * AOT
+
+## Creating and running .NET services with Azure Container Apps
+
+[Slides](slides/ContainerApps2023.pdf)
+
+[Check this repo for a sample](https://github.com/CodebreakerApp/codebreakerlight)
+
+[Blazor Codebreaker Test-Client](https://codebreaker-mud.azurewebsites.net/)
